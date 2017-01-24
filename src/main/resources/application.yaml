@@ -1,0 +1,10 @@
+logging:
+  level:
+    root: DEBUG
+
+spring:
+  http:
+    encoding:
+      charset: UTF-8 # Charset of HTTP requests and responses. Added to the "Content-Type" header if not set explicitly.
+      enabled: true # Enable http encoding support.
+      force: true # Force the encoding to the configured charset on HTTP requests and responses.
