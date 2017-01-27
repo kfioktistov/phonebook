@@ -10,13 +10,16 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("/phonebook")
+@RequestMapping(PhonebookController.ROOT_PATH)
 public class PhonebookController {
 
     private static final String ACCEPT_JSON_UTF_8 = "Accept=application/json;charset=UTF-8";
 
-    private static final String GET_BY_NAME = "/get/{name}";
-    private static final String GET_BY_FIRST_LETTER = "/get/page/{letter}";
+    public static final String ROOT_PATH = "/phonebook";
+    public static final String GET_BY_NAME_PATH = "/get";
+    public static final String GET_BY_NAME = GET_BY_NAME_PATH + "/{name}";
+    public static final String GET_BY_FIRST_LETTER_PATH = "/get/page";
+    public static final String GET_BY_FIRST_LETTER = GET_BY_FIRST_LETTER_PATH + "/{letter}";
 
     @Autowired
     Store store;
@@ -26,14 +29,14 @@ public class PhonebookController {
         store.add(record);
     }
 
+    @RequestMapping(path = GET_BY_NAME, method = RequestMethod.GET)
+    public Record getByName(@PathVariable("name") String name) {
+        return store.getByName(name);
+    }
+
     @RequestMapping(path = GET_BY_FIRST_LETTER, method = RequestMethod.GET)
     public List<Record> getByFirstLetter(@PathVariable("letter") char letter) {
         return store.getByLetter(letter);
-    }
-
-    @RequestMapping(path = GET_BY_NAME, method = RequestMethod.GET)
-    public Record getByFirstLetter(@PathVariable("name") String name) {
-        return store.getByName(name);
     }
 
 }

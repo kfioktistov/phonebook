@@ -5,21 +5,13 @@ package com.lessons.db.phonebook.model;
  */
 public class Record {
 
-    private String phone;
     private String name;
+    private String phone;
 
     public Record() {}
 
-    public Record(String phone, String name) {
-        this.phone = phone;
+    public Record(String name, String phone) {
         this.name = name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -29,6 +21,14 @@ public class Record {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
 }
