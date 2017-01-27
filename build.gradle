@@ -19,6 +19,25 @@ repositories {
     mavenCentral()
 }
 
+test {
+    dependsOn 'cleanTest'
+    useJUnit {
+        includeCategories 'com.lessons.db.phonebook.tests.categories.Unit'
+    }
+}
+
+task integrationTest(type: Test) {
+    useJUnit {
+        includeCategories 'com.lessons.db.phonebook.tests.categories.Integration'
+    }
+}
+
+tasks.withType(Test) {
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web'
     testCompile 'org.springframework.boot:spring-boot-starter-test'

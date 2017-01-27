@@ -3,7 +3,9 @@ package com.lessons.db.phonebook.tests;
 import com.lessons.db.phonebook.db.Store;
 import com.lessons.db.phonebook.model.Record;
 import com.lessons.db.phonebook.rest.PhonebookController;
+import com.lessons.db.phonebook.tests.categories.Unit;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -26,6 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @RunWith(SpringRunner.class)
 @WebMvcTest(PhonebookController.class)
+@Category(Unit.class)
 public class RestAvailabilityTest {
 
     private static final String name = "ИмяДляТеста";
