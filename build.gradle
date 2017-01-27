@@ -3,12 +3,16 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.3.RELEASE")
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.4.3.RELEASE'
+        classpath 'se.transmode.gradle:gradle-docker:1.2'
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'docker'
+
+group = 'db.sample'
 
 jar {
     baseName = 'phonebook'
@@ -35,6 +39,18 @@ task integrationTest(type: Test) {
 tasks.withType(Test) {
     testLogging {
         events "passed", "skipped", "failed"
+    }
+}
+
+task buildDockerImage(type: Docker, dependsOn: build) {
+    push = false
+    applicationName = jar.baseName
+    dockerfile = file('src/main/docker/Dockerfile')
+    doFirst {
+        copy {
+            from jar
+            into stageDir
+        }
     }
 }
 
